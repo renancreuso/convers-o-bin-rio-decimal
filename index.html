@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        .formulario {
+            width: 50%;
+            border: solid 1px gray;
+            padding: 1em;
+            margin: 5em auto 0 auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <form class="row row-cols-lg-auto g-3 align-items-center formulario">
+            <div class="col-12">
+                
+                <div class="input-group">
+                    <div class="input-group-text">Digite o Valor</div>
+                    <input type="number" class="form-control" id="inlineFormInputGroupUsername" placeholder="0">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
+                <select class="form-select" id="inlineFormSelectPref">
+                    <option selected>Escolha...</option>
+                    <option value="0">Binário para Decimal</option>
+                    <option value="1">Decimal para Binário</option>
+
+                </select>
+            </div>
+            <div class="col-12">
+                
+                <div class="input-group">
+                  <input type="text" class="form-control resultado" placeholder=" resultado">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary butao">Calcular</button>
+                <button type="submit" class="btn btn-primary butao2">limpar</button>
+            </div>
+           
+        </form>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script>
+        const butao = document.querySelector('.butao');
+        butao.addEventListener('click', (evento) => {
+            evento.preventDefault();
+            const numero = document.querySelector('#inlineFormInputGroupUsername').value;
+            const tipo = document.querySelector('#inlineFormSelectPref').value;
+            const resultado = document.querySelector('.resultado');
+            
+            // Checa se o número é binário ou decimal e converte para o oposto
+            if (numero.match(/^[01]+$/) && tipo == '0') {
+                // O número é binário, converte para decimal
+                const decimal = parseInt(numero, 2);
+                resultado.value = `${numero} em decimal é ${decimal}`;
+                
+
+            } else if (!isNaN(numero) && tipo == '1') {
+                // O número é decimal, converte para binário
+                const binario = Number(numero).toString(2);
+                resultado.value =`${numero} em binário é ${binario}`                
+                
+            } else {
+                resultado.value = "Número inválido.";
+            }
+        })
+        const butao2 = document.querySelector('.butao2');
+        butao2.addEventListener('click',(evento)=>{
+            evento.preventDefault();
+            const form = document.querySelector('.formulario');
+            form.reset();
+        })
+
+    </script>
+</body>
+
+</html>
